@@ -8,6 +8,7 @@ class SpinKitFadingCircle extends StatefulWidget {
     this.size = 50.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
+    this.isStop: false
   })  : assert(
             !(itemBuilder is IndexedWidgetBuilder && color is Color) &&
                 !(itemBuilder == null && color == null),
@@ -19,6 +20,7 @@ class SpinKitFadingCircle extends StatefulWidget {
   final double size;
   final IndexedWidgetBuilder itemBuilder;
   final Duration duration;
+  final bool isStop;
 
   @override
   _SpinKitFadingCircleState createState() => _SpinKitFadingCircleState();
@@ -43,6 +45,10 @@ class _SpinKitFadingCircleState extends State<SpinKitFadingCircle>
 
   @override
   Widget build(BuildContext context) {
+    if(widget.isStop){
+      _controller.stop();
+    }
+
     return Center(
       child: SizedBox.fromSize(
         size: Size.square(widget.size),
