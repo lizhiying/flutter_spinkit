@@ -2,14 +2,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/src/utils.dart';
 
 class SpinKitFadingCircle extends StatefulWidget {
-  SpinKitFadingCircle({
-    Key key,
-    this.color,
-    this.size = 50.0,
-    this.itemBuilder,
-    this.duration = const Duration(milliseconds: 1200),
-    this.isStop: false
-  })  : assert(
+  SpinKitFadingCircle(
+      {Key key,
+      this.color,
+      this.size = 50.0,
+      this.itemBuilder,
+      this.duration = const Duration(milliseconds: 1200),
+      this.isStop: false})
+      : assert(
             !(itemBuilder is IndexedWidgetBuilder && color is Color) &&
                 !(itemBuilder == null && color == null),
             'You should specify either a itemBuilder or a color'),
@@ -45,8 +45,10 @@ class _SpinKitFadingCircleState extends State<SpinKitFadingCircle>
 
   @override
   Widget build(BuildContext context) {
-    if(widget.isStop){
-      _controller.stop();
+    if (widget.isStop) {
+      _controller.reset();
+    } else {
+      _controller.repeat();
     }
 
     return Center(
